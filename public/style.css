@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.brand-logo {
+  margin: 0 18px;
+}
+
+.formContainor {
+  text-align: center;
+  margin: 5% auto;
+  border-radius: 2px;
+}
+
+.third-login {
+  margin: 3% auto;
+}
+
+#submit {
+  margin-bottom: 3%;
+}

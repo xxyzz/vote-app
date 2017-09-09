@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Log In</title>
+    <meta name="description" content="A vote page, FreeCodeCamp Dynamic Web Appliction Project">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/21521abb-186a-4e7f-a3c4-a995afeeeff1%2Ffavicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2196f3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">  
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-wrapper light-blue">
+          <a href="/" class="brand-logo left">Vote App</a>
+          <ul class="right">
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container row">
+      <div class="formContainor z-depth-3 col s12 m6 offset-m3">
+        <form class="form">
+          <div class="col s6 third-login">
+            <a href="#" class="waves-effect waves-light btn blue">Twitter</a>
+          </div>
+          <div class="col s6 third-login">
+            <a href="#" class="waves-effect waves-light btn black">Github</a>
+          </div>
+          <div class="col s12">
+            <hr>
+          </div>
+          <div class="input-field col s12">
+            <input id="username" type="text" class="validate">
+            <label for="username">User Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="passwaord" type="password" class="validate">
+            <label for="password">Password</label>
+          </div>
+          <div id="submit" class="col s12">
+            <a type="submit" class="waves-effect waves-light btn">Log In</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    <footer class="page-footer grey">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">Vote App</h5>
+            <p class="grey-text text-lighten-4">FreeCodeCamp Dynamic Web Appliction Project</p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Links</h5>
+            <ul>
+              <li><a class="grey-text text-lighten-3" href="https://github.com/xxyzz/vote-app" target="_blank">Source Code</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://xxyzz.me" target="_blank">Blog</a></li>
+              <li><a class="grey-text text-lighten-3" href="https://xxyzz.github.io" target="_blank">Other Projects</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+        © 2017 Copyright xxyzz
+        </div>
+      </div>
+    </footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>
