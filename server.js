@@ -1,18 +1,23 @@
 var express = require('express');
 var app = express();
+var routes = require('./routes');
+var passport = require('./passport');
+var session = require('express-session');
+var mongoose = require('mongoose');
 
-app.use(express.static('public'));
+mongoose.connect(process.env.DB_URL);
 
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
-});
+app.use(express.static('public'))
 
-app.get("/signup", function (request, response) {
-  response.sendFile(__dirname + '/views/signup.html');
-});
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get("/login", function (request, response) {
-  response.sendFile(__dirname + '/views/login.html');
-});
+routes(app,passport);
 
 app.listen(process.env.PORT);

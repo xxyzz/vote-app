@@ -10,7 +10,15 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "passport": "^0.4.0",
+    "express-session": "^1.15.5",
+    "passport-local": "^1.0.0",
+    "passport-github": "^1.1.0",
+    "passport-twitter": "^1.0.4",
+    "mongoose": "^4.11.11",
+    "mongoose-findorcreate": "^2.0.0",
+    "passport-local-mongoose": "^4.2.1"
   },
   "engines": {
     "node": "8.x"
