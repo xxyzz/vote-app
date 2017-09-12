@@ -25,3 +25,16 @@ main {
 #submit {
   margin-bottom: 3%;
 }
+
+.or span {
+  position: relative;
+  background-color: #FAFBFC;
+  padding: 10px;
+  display: inline-block;
+  }
+
+.or hr {
+  position: relative;
+  margin: 0;
+  top: 22px;
+}

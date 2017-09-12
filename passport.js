@@ -5,6 +5,8 @@ var LocalStrategy = require('passport-local');
 var GitHubStrategy = require('passport-github').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 
+passport.use(new LocalStrategy(User.authenticate()));
+
 passport.use(new GitHubStrategy({
     clientID: configAuth.githubAuth.clientID,
     clientSecret: configAuth.githubAuth.clientSecret,

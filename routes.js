@@ -1,3 +1,5 @@
+var User = require('./user');
+var passport = require('./passport');
 module.exports = function (app, passport) {
   
   app.get("/", function (request, response) {
@@ -26,5 +28,18 @@ module.exports = function (app, passport) {
 		failureRedirect: '/login'
 	}));
 
+  app.post('/auth/login', passport.authenticate('local', {
+    successRedirect: '/',
+		failureRedirect: '/login'
+  }));
+  
+  app.post('/auth/signup', function(req, res) {
+     User.register({ username: req.body.username }, req.body.password, function(err, user) {
+      if (err) return res.redirect('/signup');
+      passport.authenticate('local')(req, res, () => {
+        res.redirect('/');
+      });
+     });
+  });
   
 }

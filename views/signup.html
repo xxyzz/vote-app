@@ -26,26 +26,27 @@
     <main class="container row">
       <h2 class="center-align">Sign Up</h2>
       <div class="formContainor z-depth-3 col s12 m6 offset-m3">
-        <form class="form">
-          <div class="col s6 third-login">
-            <a href="/auth/twitter" class="waves-effect waves-light btn blue">Twitter</a>
-          </div>
-          <div class="col s6 third-login">
-            <a href="/auth/github" class="waves-effect waves-light btn black">Github</a>
-          </div>
-          <div class="col s12">
-            <hr>
-          </div>
+        <div class="col s6 third-login">
+          <a href="/auth/twitter" class="waves-effect waves-light btn blue">Twitter</a>
+        </div>
+        <div class="col s6 third-login">
+          <a href="/auth/github" class="waves-effect waves-light btn black">Github</a>
+        </div>
+        <div class="col s12 or">
+          <hr>
+          <span>OR</span>
+        </div>
+        <form action="/auth/signup" method="post">
           <div class="input-field col s12">
-            <input id="username" type="text" class="validate">
+            <input id="username" name="username" type="text" class="validate" required>
             <label for="username" data-error="Try different name" data-success="OK">User Name</label>
           </div>
           <div class="input-field col s12">
-            <input id="passwaord" type="password" class="validate">
+            <input id="password" name="password" type="password" class="validate" required>
             <label for="password">Password</label>
           </div>
           <div id="submit" class="col s12">
-            <a type="submit" class="waves-effect waves-light btn">Sign Up</a>
+            <button type="submit" class="waves-effect waves-light btn">Sign Up</button>
           </div>
         </form>
       </div>
