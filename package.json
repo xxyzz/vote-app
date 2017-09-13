@@ -19,7 +19,8 @@
     "mongoose": "^4.11.11",
     "mongoose-findorcreate": "^2.0.0",
     "passport-local-mongoose": "^4.2.1",
-    "body-parser": "^1.18.0"
+    "body-parser": "^1.18.0",
+    "request": "^2.81.0"
   },
   "engines": {
     "node": "8.x"

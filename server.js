@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 var routes = require('./routes');
 var passport = require('./passport');
 var session = require('express-session');
@@ -13,9 +13,11 @@ mongoose.connect(process.env.DB_URL, {
   useMongoClient: true
 });
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -25,6 +27,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-routes(app,passport);
+routes(app, passport);
 
 app.listen(process.env.PORT);
