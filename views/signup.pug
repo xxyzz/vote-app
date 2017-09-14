@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h2.center-align Sign Up
+  .formContainor.z-depth-3.col.s12.m6.offset-m3
+    .col.s6.form_button
+      a.waves-effect.waves-light.btn.blue(href='/auth/twitter') Twitter
+    .col.s6.form_button
+      a.waves-effect.waves-light.btn.black(href='/auth/github') Github
+    .col.s12.or
+      hr
+      span OR
+    form(action="/auth/signup" method="post")
+      .input-field.col.s12
+        input.validate(id="username" name="username" type="text" required)
+        label(for="username" data-error="Try different name" data-success="OK")User Name
+      .input-field.col.s12
+        input.validate(id="password" name="password" type="password" required)
+        label(for="password")Password
+      .col.s12
+        .g-recaptcha(data-sitekey="6LdsijAUAAAAALKXnK_WWZlyEjXKpxk_T-Rwp4dp")
+      .col.s12.form_button
+        button.waves-effect.waves-light.btn(type="submit")Sign Up

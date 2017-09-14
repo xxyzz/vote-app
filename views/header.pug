@@ -1,0 +1,17 @@
+header
+  nav
+    .nav-wrapper.light-blue
+      a.brand-logo.left(href='/') Vote App
+      ul.right
+        if !user
+          li
+            a(href='/login') Log In
+          li
+            a(href='/signup') Sign Up
+        else
+          a.dropdown-button(data-activates='dropdown') #{user.username}
+          ul.dropdown-content(id='dropdown')
+            li
+              a(href='/mypolls')My Polls
+            li
+              a(href='/logout')Log Out

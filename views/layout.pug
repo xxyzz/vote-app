@@ -1,0 +1,10 @@
+doctype html
+html
+  include head.pug
+  body
+    include header.pug
+    main.container.row
+      block content
+    include footer.pug
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js')

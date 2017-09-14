@@ -5,6 +5,7 @@ var routes = require('./routes');
 var passport = require('./passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
+// var auth = require('./middlewares/auth');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_URL, {
@@ -13,6 +14,7 @@ mongoose.connect(process.env.DB_URL, {
   useMongoClient: true
 });
 
+app.set('view engine', 'pug');
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({
@@ -26,7 +28,10 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 routes(app, passport);
 
 app.listen(process.env.PORT);

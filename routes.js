@@ -4,15 +4,21 @@ var passport = require('./passport');
 module.exports = function(app, passport) {
 
   app.get("/", function(request, response) {
-    response.sendFile(__dirname + '/views/index.html');
+    response.render('index', {
+      title: 'Vote App'
+    });
   });
 
   app.get("/signup", function(request, response) {
-    response.sendFile(__dirname + '/views/signup.html');
+    response.response.render('signup', {
+      title: 'Sign Up'
+    });
   });
 
   app.get("/login", function(request, response) {
-    response.sendFile(__dirname + '/views/login.html');
+    response.response.render('login', {
+      title: 'Log In'
+    });
   });
 
   app.get('/auth/twitter', passport.authenticate('twitter'));
@@ -56,5 +62,10 @@ module.exports = function(app, passport) {
         });
       });
     });
+  });
+
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
   });
 };

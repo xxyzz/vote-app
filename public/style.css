@@ -18,12 +18,8 @@ main {
   border-radius: 2px;
 }
 
-.third-login {
+.form_button {
   margin: 3% auto;
-}
-
-#submit {
-  margin-bottom: 3%;
 }
 
 .or span {
