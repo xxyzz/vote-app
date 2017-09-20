@@ -13,11 +13,12 @@ block content
     form(action="/auth/signup" method="post")
       .input-field.col.s12
         input.validate(id="username" name="username" type="text" required)
-        label(for="username" data-error="Try different name" data-success="OK")User Name
+        label(for="username" data-error="Try different name" data-success="OK") User Name
       .input-field.col.s12
-        input.validate(id="password" name="password" type="password" required)
-        label(for="password")Password
+        input(id="password" name="password" type="password" required)
+        label(for="password") Password
       .col.s12
         .g-recaptcha(data-sitekey="6LdsijAUAAAAALKXnK_WWZlyEjXKpxk_T-Rwp4dp")
       .col.s12.form_button
-        button.waves-effect.waves-light.btn(type="submit")Sign Up
+        button.waves-effect.waves-light.btn(type="submit") Sign Up
+      script(src='https://www.google.com/recaptcha/api.js')

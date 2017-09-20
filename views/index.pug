@@ -2,7 +2,18 @@ extends layout
 
 block content
 
-  if !user
-    p Not login yet
+  if (!polls.length)
+    p No polls yet
   else
-    p Welecome back
+    each poll in polls
+      .col.s12.m6
+        .card.blue-grey.darken-1
+          .card-content white-text
+            span.card-title poll.title
+            - date = new Date(poll.createdAt).toDateString()
+            p date poll.totalVotes
+          .card-action
+            a(href='/polls/#{poll._id}') View this poll
+  a.fixed-action-btn(href="/new")
+    button.btn-floating.btn-large.waves-effect.waves-light(style="bottom: 45px; right: 24px")
+      i.material-icons add

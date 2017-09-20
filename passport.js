@@ -1,5 +1,5 @@
 var passport = require('passport');
-var User = require('./user');
+var User = require('./models/user');
 var configAuth = require('./auth');
 var LocalStrategy = require('passport-local');
 var GitHubStrategy = require('passport-github').Strategy;

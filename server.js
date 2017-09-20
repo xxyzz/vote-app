@@ -5,32 +5,32 @@ var routes = require('./routes');
 var passport = require('./passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
-// var auth = require('./middlewares/auth');
+var auth = require('./middlewares/auth');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB_URL, {
-  keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
-  useMongoClient: true
+    keepAlive: true,
+    reconnectTries: Number.MAX_VALUE,
+    useMongoClient: true
 });
 
 app.set('view engine', 'pug');
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use((req, res, next) => {
-  res.locals.user = req.user;
-  next();
+app.use(function(req, res, next) {
+    res.locals.user = req.user;
+    next();
 });
 routes(app, passport);
 

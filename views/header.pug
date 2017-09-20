@@ -8,10 +8,10 @@ header
             a(href='/login') Log In
           li
             a(href='/signup') Sign Up
-        else
-          a.dropdown-button(data-activates='dropdown') #{user.username}
+        else          
+          a.dropdown-button(data-activates='dropdown' data-beloworigin="true") #{user.username}
           ul.dropdown-content(id='dropdown')
             li
-              a(href='/mypolls')My Polls
+              a(href='/mypolls') My Polls
             li
-              a(href='/logout')Log Out
+              a(href='/logout') Log Out
