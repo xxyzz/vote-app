@@ -1,7 +1,7 @@
 body {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -13,8 +13,8 @@ main {
 }
 
 .formContainor {
-  text-align: center;
   margin: 5% auto;
+  text-align: center;
   border-radius: 2px;
 }
 
@@ -24,17 +24,29 @@ main {
 
 .or span {
   position: relative;
-  background-color: #FAFBFC;
-  padding: 10px;
   display: inline-block;
+  padding: 10px;
+  background-color: #fafbfc;
 }
 
 .or hr {
   position: relative;
-  margin: 0;
   top: 22px;
+  margin: 0;
 }
 
 .g-recaptcha {
   display: inline-block;
+}
+
+.remove_option {
+  line-height: 43px;
+  position: absolute;
+  right: 0;
+  width: 43px;
+  cursor: pointer;
+}
+
+.remove_option:hover {
+  color: red;
 }

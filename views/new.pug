@@ -3,7 +3,7 @@ extends layout
 block content
   h2.center-align New Poll
   .formContainor.z-depth-3.col.s12.m6.offset-m3
-    form(action="/polls" method="post")
+    form.form(action="/polls" method="post")
       .input-field.col.s12
         input(id="title" name="poll[title]" type="text" required)
         label(for="title") Poll Title
