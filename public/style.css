@@ -1,52 +1,50 @@
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 .brand-logo {
-  margin: 0 18px;
+    margin: 0 18px;
 }
 
 .formContainor {
-  margin: 5% auto;
-  text-align: center;
-  border-radius: 2px;
+    text-align: center;
 }
 
 .form_button {
-  margin: 3% auto;
+    margin: 3% auto;
 }
 
 .or span {
-  position: relative;
-  display: inline-block;
-  padding: 10px;
-  background-color: #fafbfc;
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    background-color: #fafbfc;
 }
 
 .or hr {
-  position: relative;
-  top: 22px;
-  margin: 0;
+    position: relative;
+    top: 22px;
+    margin: 0;
 }
 
 .g-recaptcha {
-  display: inline-block;
+    display: inline-block;
 }
 
 .remove_option {
-  line-height: 43px;
-  position: absolute;
-  right: 0;
-  width: 43px;
-  cursor: pointer;
+    line-height: 43px;
+    position: absolute;
+    right: 0;
+    width: 43px;
+    cursor: pointer;
 }
 
 .remove_option:hover {
-  color: red;
+    color: red;
 }

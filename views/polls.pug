@@ -2,9 +2,9 @@ extends layout
 
 block content
 
-  .formContainor.card.blue-grey.darken-1.col.s12.m6.offset-m3
-    form.form(action="/polls/" + poll._id + "/vote"  method="post")
-      .card-content.white-text
+  .formContainor.col.s12.m6.card.blue-grey.darken-1
+    .card-content.white-text
+      form(action="/polls/" + poll._id + "/vote"  method="post")
         span.card-title #{poll.title}
         p Created by #{poll.author.username}
         - var date = new Date(poll.createdAt).toDateString()
@@ -22,6 +22,11 @@ block content
           else
             button.waves-effect.waves-light.btn(type="submit") Vote
         script $(document).ready(function(){$('select').material_select();});
+  script(src="https://www.gstatic.com/charts/loader.js")
+  script(src="/chart.js")
+  .col.s12.m6
+    .card.blue-grey.darken-1
+      #chart
   a.fixed-action-btn(href="/new")
     button.btn-floating.btn-large.waves-effect.waves-light(style="bottom: 45px; right: 24px")
       i.material-icons add

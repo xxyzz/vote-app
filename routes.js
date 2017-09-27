@@ -79,4 +79,50 @@ module.exports = function(app, passport) {
             title: 'New Poll'
         });
     });
+
+    app.post('/polls', auth.isAuthenticated, function(req, res, next) {
+        var newpoll = req.body.poll;
+
+        newpoll.options = newpoll.options.map(function(option) {
+            return { description: option };
+        });
+
+        newpoll.author = req.user;
+
+        Poll.create(newpoll).then(function(poll) {
+            res.redirect('/');
+        });
+    });
+
+    app.get('/polls/:pollId', function(req, res, next) {
+        Poll.findById(req.params.pollId)
+            .populate('author')
+            .exec()
+            .then(poll => {
+                res.format({
+                    'text/html': () => res.render('polls', { poll, title: poll.title }),
+                    'application/json': () => res.json(poll)
+                });
+            })
+            .catch(err => next(err));
+    });
+
+    app.post('/polls/:pollId/vote', auth.checkVoted, function(req, res, next) {
+        Poll.findById(req.params.pollId)
+            .then(poll => {
+
+                poll.options
+                    .id(req.body.vote)
+                    .votes
+                    .push(req.user);
+
+                poll.save()
+                    .then(() => res.redirect('/polls/' + req.params.pollId))
+                    .catch(err => next(err));
+
+            })
+            .catch(err => next(err));
+    });
+
+    app.get('');
 };
