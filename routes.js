@@ -10,7 +10,7 @@ module.exports = function(app, passport) {
         Poll.find({})
             .populate('author')
             .exec()
-            .then(polls => response.render('index', { polls, title: 'Vote App' }))
+            .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
             .catch(err => next(err));
     });
 
@@ -124,5 +124,10 @@ module.exports = function(app, passport) {
             .catch(err => next(err));
     });
 
-    app.get('');
+    app.get('/mypolls', auth.isAuthenticated, function(req, res) {
+        Poll.find({ author: req.user })
+            .then(polls => {
+                res.render('index', { polls, title: 'My Polls' })
+            })
+    });
 };
