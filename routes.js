@@ -107,6 +107,12 @@ module.exports = function(app, passport) {
             .catch(err => next(err));
     });
 
+    app.post('/polls/:pollId', function(req, res, next) {
+        Poll.findByIdAndRemove(req.params.pollId, function(err) {
+            res.redirect('/')
+        });
+    });
+
     app.post('/polls/:pollId/vote', auth.checkVoted, function(req, res, next) {
         Poll.findById(req.params.pollId)
             .then(poll => {

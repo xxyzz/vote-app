@@ -6,7 +6,7 @@ block content
     p No polls yet
   else
     each poll in polls
-      .col.s12.m6
+      .col.s12.m5
         .card.blue-grey.darken-1
           .card-content.white-text
             span.card-title #{poll.title}
@@ -15,6 +15,13 @@ block content
               span.new.badge(data-badge-caption="Votes") #{poll.totalVotes}
           .card-action
             a(href='/polls/' + poll._id) View this poll
-  a.fixed-action-btn(href="/new")
-    button.btn-floating.btn-large.waves-effect.waves-light(style="bottom: 45px; right: 24px")
-      i.material-icons add
+  .fixed-action-btn.horizontal(style="bottom: 45px; right: 24px")
+    button.btn-floating.btn-large
+      i.material-icons mode_edit
+    ul
+      li
+        a.btn-floating.blue(href="https://twitter.com/intent/tweet?url=https://cliff-blade.glitch.me&text=Check out this vote webpage: " + title target="_blank")
+          i.material-icons share
+      li
+        a.btn-floating.green(href="/new")
+          i.material-icons add

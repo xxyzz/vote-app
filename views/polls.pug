@@ -2,31 +2,44 @@ extends layout
 
 block content
 
-  .formContainor.col.s12.m6.card.blue-grey.darken-1
-    .card-content.white-text
-      form(action="/polls/" + poll._id + "/vote"  method="post")
-        span.card-title #{poll.title}
-        p Created by #{poll.author.username}
-        - var date = new Date(poll.createdAt).toDateString()
-        p #{date}
-          span.new.badge(data-badge-caption="Votes") #{poll.totalVotes}
-        .input-field.col.s12
-          select(name="vote" required)
-            option(value="" disabled selected) Choose your option
-            each option in poll.options
-              option(value=option._id) #{option.description}
-          label Options
-        .col.s12.form_button
-          if poll.userVoted(user)
-            button.waves-effect.waves-light.btn.disabled(type="button") Vote
-          else
-            button.waves-effect.waves-light.btn(type="submit") Vote
-        script $(document).ready(function(){$('select').material_select();});
+  .col.s12.m6
+    .card.blue-grey.darken-1
+      .card-content.white-text
+        form(action="/polls/" + poll._id + "/vote"  method="post")
+          span.card-title #{poll.title}
+          p Created by #{poll.author.username}
+          - var date = new Date(poll.createdAt).toDateString()
+          p #{date}
+            span.new.badge(data-badge-caption="Votes") #{poll.totalVotes}
+          .input-field
+            select(name="vote" required)
+              option(value="" disabled selected) Choose your option
+              each option in poll.options
+                option(value=option._id) #{option.description}
+            label Options
+          .center-align
+            if poll.userVoted(user)
+              button.waves-effect.waves-light.btn.disabled(type="button") Vote
+            else
+              button.waves-effect.waves-light.btn(type="submit") Vote
+          script $(document).ready(function(){$('select').material_select();});
   script(src="https://www.gstatic.com/charts/loader.js")
   script(src="/chart.js")
   .col.s12.m6
     .card.blue-grey.darken-1
       #chart
-  a.fixed-action-btn(href="/new")
-    button.btn-floating.btn-large.waves-effect.waves-light(style="bottom: 45px; right: 24px")
-      i.material-icons add
+  .fixed-action-btn.horizontal(style="bottom: 45px; right: 24px")
+    button.btn-floating.btn-large
+      i.material-icons mode_edit
+    ul
+      if user && poll.author._id.$oid === user._id.$oid
+        li
+          form(action="/polls/" + poll._id method="post")
+            button.btn-floating.red(type="submit")
+              i.material-icons delete
+      li
+        a.btn-floating.blue(href="https://twitter.com/intent/tweet?url=https://cliff-blade.glitch.me/polls/" + poll._id + "&text=Check out this vote: " + title target="_blank")
+          i.material-icons share
+      li
+        a.btn-floating.green(href="/new")
+          i.material-icons add
