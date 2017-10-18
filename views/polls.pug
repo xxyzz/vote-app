@@ -32,7 +32,7 @@ block content
     button.btn-floating.btn-large
       i.material-icons mode_edit
     ul
-      if user && poll.author._id.$oid === user._id.$oid
+      if user && poll.author._id.toString() === user._id.toString()
         li
           form(action="/polls/" + poll._id method="post")
             button.btn-floating.red(type="submit")
