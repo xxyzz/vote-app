@@ -28,22 +28,22 @@ module.exports = function(app, passport) {
 
     app.get('/auth/twitter', passport.authenticate('twitter'));
 
-    app.get('/auth/twitter/callback', passport.authenticate('twitter', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }));
+    app.get('/auth/twitter/callback', passport.authenticate('twitter'), function(req, res) {
+        res.redirect(req.session.returnTo || '/');
+        delete req.session.returnTo;
+    });
 
     app.get('/auth/github', passport.authenticate('github'));
 
-    app.get('/auth/github/callback', passport.authenticate('github', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }));
+    app.get('/auth/github/callback', passport.authenticate('github'), function(req, res) {
+        res.redirect(req.session.returnTo || '/');
+        delete req.session.returnTo;
+    });
 
-    app.post('/auth/login', passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/login'
-    }));
+    app.post('/auth/login', passport.authenticate('local'), function(req, res) {
+        res.redirect(req.session.returnTo || '/');
+        delete req.session.returnTo;
+    });
 
     app.post('/auth/signup', function(req, res) {
         if (req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
@@ -94,7 +94,7 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('/polls/:pollId', function(req, res, next) {
+    app.get(['/polls/:pollId', '/polls/:pollId/vote'], function(req, res, next) {
         Poll.findById(req.params.pollId)
             .populate('author')
             .exec()

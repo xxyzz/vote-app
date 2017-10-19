@@ -12,13 +12,17 @@ block content
       span OR
     form(action="/auth/signup" method="post")
       .input-field.col.s12
-        input.validate(id="username" name="username" type="text" required)
+        input(id="username" name="username" type="text" required)
         label(for="username" data-error="Try different name" data-success="OK") User Name
       .input-field.col.s12
         input(id="password" name="password" type="password" required)
         label(for="password") Password
+      .col.s12(style="margin: 1em auto")
+        input(type="checkbox" class="filled-in" id="show_password")
+        label(for="show_password") Show password
       .col.s12
         .g-recaptcha(data-sitekey="6LdsijAUAAAAALKXnK_WWZlyEjXKpxk_T-Rwp4dp")
       .col.s12.form_button
         button.waves-effect.waves-light.btn(type="submit") Sign Up
       script(src='https://www.google.com/recaptcha/api.js')
+      script(src='/showpassword.js')

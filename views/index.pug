@@ -3,7 +3,7 @@ extends layout
 block content
 
   if (!polls.length)
-    p No polls yet
+    p No polls yet, create a #[a(href='/new') new poll] now!
   else
     each poll in polls
       .col.s12.m5
