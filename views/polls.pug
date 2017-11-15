@@ -18,7 +18,7 @@ block content
                 option(value=option._id) #{option.description}
             label Options
           .center-align
-            if poll.userVoted(user)
+            if poll.userVoted(loggedUser)
               button.waves-effect.waves-light.btn.disabled(type="button") Vote
             else
               button.waves-effect.waves-light.btn(type="submit") Vote
