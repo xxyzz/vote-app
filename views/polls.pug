@@ -22,24 +22,40 @@ block content
               button.waves-effect.waves-light.btn.disabled(type="button") Vote
             else
               button.waves-effect.waves-light.btn(type="submit") Vote
-          script $(document).ready(function(){$('select').material_select();});
   script(src="https://www.gstatic.com/charts/loader.js")
   script(src="/chart.js")
   .col.s12.m6
     .card.blue-grey.darken-1
       #chart
-  .fixed-action-btn.horizontal(style="bottom: 45px; right: 24px")
+  .fixed-action-btn(style="bottom: 45px; right: 24px")
     button.btn-floating.btn-large
-      i.material-icons mode_edit
+      i.material-icons menu
     ul
-      if user && poll.author._id.toString() === user._id.toString()
+      if poll.pollAuthor(loggedUser)
         li
-          form(action="/polls/" + poll._id method="post")
-            button.btn-floating.red(type="submit")
-              i.material-icons delete
-      li
-        a.btn-floating.blue(href="https://twitter.com/intent/tweet?url=https://cliff-blade.glitch.me/polls/" + poll._id + "&text=Check out this vote: " + title target="_blank")
-          i.material-icons share
+          a.btn-floating(href="/polls/" + poll._id + "/edit")
+            i.material-icons mode_edit
+        li
+          a.btn-floating.red.modal-trigger(href="#modal")
+            i.material-icons delete
       li
         a.btn-floating.green(href="/new")
           i.material-icons add
+      li
+        a.btn-floating.blue(href="https://twitter.com/intent/tweet?url=https://cliff-blade.glitch.me/polls/" + poll._id + "&text=Check out this vote: " + title target="_blank")
+          i.material-icons share
+  .modal#modal
+    .modal-content
+      p Are you sure to delete this poll? 
+    .modal-footer
+      form(action="/polls/" + poll._id method="post")
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(type="submit") Ok
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(type="button") Cancel
+  script.
+    $(document).ready(function(){
+      $('.fixed-action-btn').floatingActionButton({
+        direction: 'top', // Direction menu comes out
+        hoverEnabled: true, // Hover enabled
+        toolbarEnabled: false // Toolbar transition enabled
+      });
+    });

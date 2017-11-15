@@ -29,15 +29,19 @@ pollSchema.virtual('totalVotes').get(function() {
 });
 
 pollSchema.methods.userVoted = function(user) {
+  if (!user) return false;
 
-    if (!user) return false;
-
-    return this.options.some(option => {
-        return option.votes.some(vote => {
-            return vote.equals(user._id);
-        });
+  return this.options.some(option => {
+    return option.votes.some(vote => {
+      return vote.equals(user._id);
     });
+  });
+};
 
+pollSchema.methods.pollAuthor = function(user) {
+  if (!user) return false;
+  
+  return this.author.equals(user._id);
 };
 
 module.exports = mongoose.model('Poll', pollSchema);
