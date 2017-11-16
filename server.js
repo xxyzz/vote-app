@@ -30,6 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
   res.locals.loggedUser = req.user;
+  res.locals.path = req.path;
   next();
 });
 routes(app, passport);

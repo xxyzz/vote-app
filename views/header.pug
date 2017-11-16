@@ -17,7 +17,18 @@ header
               a(href='/setting') Setting
             li
               a(href='/logout') Log Out
+      if path === '/' || path === '/mypolls'
+        a.btn-flat.right.dropdown-trigger.white-text#filterButton(data-target='filter')
+          i.material-icons filter_list
+        ul.dropdown-content(id='filter')
+          li
+            a(href= path + '?sort=mv') Most voted
+          li
+            a(href= path + '?sort=do') Date added (oldest)
+          li
+            a(href= path) Date added (newest)
   script.
     $('.dropdown-trigger').dropdown({
-      coverTrigger: false
+      coverTrigger: false,
+      constrainWidth: false
     });

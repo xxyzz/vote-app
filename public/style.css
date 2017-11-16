@@ -53,3 +53,7 @@ main {
   box-sizing: border-box;
   padding-right: 30px;
 }
+
+#filterButton {
+  height: 100%;
+}

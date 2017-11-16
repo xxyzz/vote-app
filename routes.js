@@ -6,12 +6,23 @@ var auth = require('./middlewares/auth');
 
 module.exports = function(app, passport) {
 
-  app.get("/", function(request, response, next) {
-    Poll.find({})
-        .populate('author')
-        .exec()
-        .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
-        .catch(err => next(err));
+  app.get("/", function(request, response, next) {   
+    switch(request.query.sort) {
+      case 'mv':
+        Poll.find({}).sort('options.votes')
+          .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
+          .catch(err => next(err));
+        break;
+      case 'do':
+        Poll.find({})
+          .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
+          .catch(err => next(err));
+        break;
+      default:
+        Poll.find({}).sort('-createdAt')
+          .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
+          .catch(err => next(err));
+    }
   });
 
   app.get("/signup", function(request, response) {
@@ -135,12 +146,24 @@ module.exports = function(app, passport) {
   });
 
   // Show user's polls
-  app.get('/mypolls', auth.login, function(req, res) {
-    Poll.find({ author: req.user })
-      .then(polls => {
-        res.render('index', { polls, title: 'My Polls' })
-      })
-    });
+  app.get('/mypolls', auth.login, function(req, res, next) {
+    switch(req.query.sort) {
+      case 'mv':
+        Poll.find({ author: req.user }).sort('options.votes')
+          .then(polls => res.render('index', { polls, title: 'My Polls' }))
+          .catch(err => next(err));
+        break;
+      case 'do':
+        Poll.find({ author: req.user })
+          .then(polls => res.render('index', { polls, title: 'My Polls' }))
+          .catch(err => next(err));
+        break;
+      default:
+        Poll.find({ author: req.user }).sort('-createdAt')
+          .then(polls => res.render('index', { polls, title: 'My Polls' }))
+          .catch(err => next(err));
+    }
+  });
   
   // Edit poll page
   app.get('/polls/:pollId/edit', auth.checkOwner, function(req, res, next) {
