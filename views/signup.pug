@@ -13,13 +13,14 @@ block content
     form(action="/auth/signup" method="post")
       .input-field.col.s12
         input(id="username" name="username" type="text" required minlength="3" maxlength="12")
-        label(for="username" data-error="Try different name" data-success="OK") User Name
+        label(for="username") User Name
       .input-field.col.s12
-        input(id="password" name="password" type="password" required minlength="6" maxlength="12")
+        input(id="password" name="password" type="password" required minlength="6" maxlength="30")
         label(for="password") Password
       .col.s12(style="margin: 1em auto")
-        input(type="checkbox" class="filled-in" id="show_password")
-        label(for="show_password") Show password
+        label
+          input(type="checkbox" class="filled-in" id="show_password")
+          span Show password
       .col.s12
         .g-recaptcha(data-sitekey="6LdsijAUAAAAALKXnK_WWZlyEjXKpxk_T-Rwp4dp")
       .col.s12.form_button
