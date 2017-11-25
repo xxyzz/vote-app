@@ -164,12 +164,39 @@ module.exports = function(app, passport) {
           .catch(err => next(err));
     }
   });
-  
+ 
   // Edit poll page
   app.get('/polls/:pollId/edit', auth.checkOwner, function(req, res, next) {
     Poll.findById(req.params.pollId)
       .then(poll => res.render('edit', { poll, title: 'Edit Poll' }))
       .catch(err => next(err));
-  })
+  });
+  
+  // Update edited poll
+  app.post('/polls/:pollId/edit', auth.checkOwner, function(req, res, next) {
+    let newTitle = req.body.poll.title;
+    let newOptions = req.body.poll.options;
     
-  };
+    newOptions = newOptions.map(option => {
+      return { description: option };
+    });
+    
+    Poll.findById(req.params.pollId)
+      .then(poll => {
+        poll.title = newTitle;
+        poll.options = poll.options.concat(newOptions);
+        poll.save()
+            .then(() => res.redirect('/polls/' + req.params.pollId))
+            .catch(err => next(err));
+      })
+      .catch(err => next(err));
+  });
+  
+  // Setting page 
+  app.get("/setting", auth.login, function(request, response) {
+    response.render('setting', {
+      title: 'Setting'
+    });
+  });
+  
+};
