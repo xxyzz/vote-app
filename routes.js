@@ -207,4 +207,16 @@ module.exports = function(app, passport) {
       res.redirect('/');
     });
   });
+  
+  // Change password
+  app.post("/changePassword", auth.login, function(req, res) {
+    req.user.changePassword(req.body.oldPassword, req.body.newPassword, function(err) {
+      if (err) {
+        res.redirect('/setting')
+      } else {
+        req.logout();
+        res.redirect('/login'); 
+      }
+    });
+  });
 };
