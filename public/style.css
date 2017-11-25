@@ -1,3 +1,12 @@
+@media screen and  (max-width: 450px) {
+  .brand-logo {
+    display: none !important;
+  }
+  #filterButton {
+    float: left !important;
+  }
+}
+
 body {
   display: flex;
   min-height: 100vh;

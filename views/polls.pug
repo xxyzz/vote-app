@@ -7,7 +7,10 @@ block content
       .card-content.white-text
         form(action="/polls/" + poll._id + "/vote"  method="post")
           span.card-title #{poll.title}
-          p Created by #{poll.author.username}
+          if poll.author
+            p Created by #{poll.author.username}
+          else
+            p Created by deleted user
           - var date = new Date(poll.createdAt).toDateString()
           p #{date}
             span.new.badge(data-badge-caption="Votes") #{poll.totalVotes}

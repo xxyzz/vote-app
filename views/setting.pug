@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  
+  .col.s12.m6.offset-m3
+    .card
+      .card-content
+        span.card-title Change password
+        form(action="/changePassword" method="post")
+          .input-field
+            input(id="oldPassword" name="oldPassword" type="password" required)
+            label(for="oldPassword") Old password 
+          .input-field
+            input(id="newPassword" name="newPassword" type="password" required minlength="6" maxlength="30")
+            label(for="newPassword") New password
+          label
+            input(type="checkbox" class="filled-in" id="show_password")
+            span Show password
+          .card-action.center-align
+            button.waves-effect.waves-light.btn(type="submit") Update password
+        span.card-title.red-text Delete account
+        p Once you delete your account, there is no going back. Please be certain.
+        .card-action.center-align
+          a.waves-effect.waves-light.btn.red.modal-trigger(href="#modal") Delete your account
+  .modal#modal
+    .modal-content
+      p Are you sure to delete your account? 
+    .modal-footer
+      form(action="/delete" method="post")
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(type="submit") Ok
+        button.modal-action.modal-close.waves-effect.waves-green.btn-flat(type="button") Cancel
+  script.
+    $('.modal').modal(); 
+    function toggler() {
+      if( document.getElementById('show_password').checked ) {
+        $('#newPassword').attr('type', 'text');
+      } else {
+        $('#newPassword').attr('type', 'password');
+      }
+    }
+    $('#show_password').click(toggler);

@@ -17,6 +17,10 @@ var pollSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    voteNum: {
+      type: Number,
+      required: true
     }
 }, {
     timestamps: true

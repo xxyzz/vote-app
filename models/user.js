@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema({
     },
     password: {
       type: String,
-      minlength: 3,
+      minlength: 6,
       maxlength: 30
     }
 });

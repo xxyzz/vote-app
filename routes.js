@@ -9,7 +9,7 @@ module.exports = function(app, passport) {
   app.get("/", function(request, response, next) {   
     switch(request.query.sort) {
       case 'mv':
-        Poll.find({}).sort('options.votes')
+        Poll.find({}).sort('-voteNum')
           .then(polls => response.render('index', { polls, title: 'Vote Or Die!' }))
           .catch(err => next(err));
         break;
@@ -51,7 +51,7 @@ module.exports = function(app, passport) {
     delete req.session.returnTo;
   });
 
-  app.post('/auth/login', passport.authenticate('local'), function(req, res) {
+  app.post('/auth/login', passport.authenticate('local', {failureRedirect: '/login'}), function(req, res) {
     res.redirect(req.session.returnTo || '/');
     delete req.session.returnTo;
   });
@@ -95,6 +95,7 @@ module.exports = function(app, passport) {
   app.post('/polls', auth.login, function(req, res, next) {
     var newpoll = req.body.poll;
 
+    newpoll.voteNum = 0;
     newpoll.options = newpoll.options.map(function(option) {
       return { description: option };
     });
@@ -131,7 +132,8 @@ module.exports = function(app, passport) {
   app.post('/polls/:pollId/vote', auth.checkVoted, function(req, res, next) {
     Poll.findById(req.params.pollId)
       .then(poll => {
-
+        
+        poll.voteNum += 1;
         poll.options
             .id(req.body.vote)
             .votes
@@ -149,7 +151,7 @@ module.exports = function(app, passport) {
   app.get('/mypolls', auth.login, function(req, res, next) {
     switch(req.query.sort) {
       case 'mv':
-        Poll.find({ author: req.user }).sort('options.votes')
+        Poll.find({ author: req.user }).sort('-voteNum')
           .then(polls => res.render('index', { polls, title: 'My Polls' }))
           .catch(err => next(err));
         break;
@@ -199,4 +201,10 @@ module.exports = function(app, passport) {
     });
   });
   
+  // Delete account
+  app.post("/delete", auth.login, function(req, res) {
+    User.findByIdAndRemove(req.user._id, function() {
+      res.redirect('/');
+    });
+  });
 };
